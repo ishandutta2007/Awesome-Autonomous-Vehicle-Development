@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B0F17" />
+      <stop offset="50%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <!-- Glowing Accent Gradient -->
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#818CF8" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#C084FC" stop-opacity="0.8" />
+    </linearGradient>
+
+    <!-- LiDAR Pulse Radial Gradient -->
+    <radialGradient id="lidarPulse" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.6" />
+      <stop offset="70%" stop-color="#818CF8" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Grid Pattern -->
+    <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1E293B" stroke-width="1" stroke-opacity="0.5" />
+    </pattern>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    @keyframes pulseRing {
+      0% { transform: scale(0.6); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 0.3; }
+      100% { transform: scale(0.6); opacity: 0.8; }
+    }
+    @keyframes scanLine {
+      0% { transform: translateX(-100px); }
+      100% { transform: translateX(1300px); }
+    }
+    @keyframes floatParticle {
+      0%, 100% { transform: translateY(0px); opacity: 0.4; }
+      50% { transform: translateY(-10px); opacity: 0.9; }
+    }
+    @keyframes trajectoryDash {
+      to { stroke-dashoffset: -40; }
+    }
+    .lidar-ring { transform-origin: 1050px 150px; animation: pulseRing 4s ease-in-out infinite; }
+    .scan-beam { animation: scanLine 6s linear infinite; }
+    .particle { animation: floatParticle 3s ease-in-out infinite; }
+    .trajectory { stroke-dasharray: 8 6; animation: trajectoryDash 1.5s linear infinite; }
+  </style>
+
+  <!-- Base Canvas -->
+  <rect width="1200" height="300" fill="url(#bgGradient)" rx="12" />
+  
+  <!-- Perspective Grid Background -->
+  <rect width="1200" height="300" fill="url(#gridPattern)" rx="12" />
+
+  <!-- Animated LiDAR Radar System (Right Side Background) -->
+  <g class="lidar-ring">
+    <circle cx="1050" cy="150" r="120" fill="url(#lidarPulse)" />
+    <circle cx="1050" cy="150" r="100" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-opacity="0.3" />
+    <circle cx="1050" cy="150" r="60" fill="none" stroke="#818CF8" stroke-width="1.5" stroke-opacity="0.4" />
+    <circle cx="1050" cy="150" r="20" fill="none" stroke="#C084FC" stroke-width="2" stroke-opacity="0.6" />
+  </g>
+
+  <!-- Autonomous Vehicle Trajectory Path (Background Flow) -->
+  <path class="trajectory" d="M 50 240 Q 300 280, 550 240 T 1150 240" fill="none" stroke="#38BDF8" stroke-width="2" stroke-opacity="0.4" />
+
+  <!-- Sensor Point Cloud Nodes (Background Elements) -->
+  <circle cx="950" cy="110" r="3" fill="#38BDF8" class="particle" style="animation-delay: 0s;" />
+  <circle cx="1020" cy="80" r="4" fill="#818CF8" class="particle" style="animation-delay: 0.5s;" />
+  <circle cx="1110" cy="180" r="3" fill="#C084FC" class="particle" style="animation-delay: 1s;" />
+  <circle cx="980" cy="200" r="3.5" fill="#38BDF8" class="particle" style="animation-delay: 1.5s;" />
+
+  <!-- Horizontal Scanning Laser Beam (Subtle Background Effect) -->
+  <line class="scan-beam" x1="0" y1="0" x2="0" y2="300" stroke="url(#accentGrad)" stroke-width="2" opacity="0.3" filter="url(#glow)" />
+
+  <!-- Top Accent Bar -->
+  <rect x="0" y="0" width="1200" height="4" fill="url(#accentGrad)" />
+
+  <!-- Foreground Content: Header Badge -->
+  <g transform="translate(60, 45)">
+    <rect width="210" height="28" rx="14" fill="#1E293B" stroke="#38BDF8" stroke-width="1" stroke-opacity="0.6" />
+    <circle cx="16" cy="14" r="5" fill="#10B981" />
+    <text x="28" y="18" fill="#F8FAFC" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" letter-spacing="0.5">AUTONOMOUS SYSTEMS</text>
+  </g>
+
+  <!-- Foreground Content: Main Title -->
+  <text x="60" y="130" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" font-size="38" font-weight="800" letter-spacing="-0.5" filter="url(#glow)">
+    Awesome Autonomous Vehicle Development
+  </text>
+
+  <!-- Foreground Content: Subtitle -->
+  <text x="60" y="170" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="17" font-weight="500">
+    Curated SaaS Platforms • Open-Source Stacks • Simulation • Synthetic Data • ADAS Validation
+  </text>
+
+  <!-- Tech Tags Pill Group -->
+  <g transform="translate(60, 205)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="140" height="28" rx="6" fill="#1E293B" stroke="#334155" stroke-width="1" />
+    <text x="14" y="18" fill="#38BDF8" font-family="sans-serif" font-size="12" font-weight="600">🚗 CARLA &amp; AirSim</text>
+
+    <!-- Pill 2 -->
+    <rect x="150" y="0" width="145" height="28" rx="6" fill="#1E293B" stroke="#334155" stroke-width="1" />
+    <text x="164" y="18" fill="#818CF8" font-family="sans-serif" font-size="12" font-weight="600">🤖 ROS2 &amp; Autoware</text>
+
+    <!-- Pill 3 -->
+    <rect x="305" y="0" width="130" height="28" rx="6" fill="#1E293B" stroke="#334155" stroke-width="1" />
+    <text x="319" y="18" fill="#C084FC" font-family="sans-serif" font-size="12" font-weight="600">⚡ Baidu Apollo</text>
+
+    <!-- Pill 4 -->
+    <rect x="445" y="0" width="145" height="28" rx="6" fill="#1E293B" stroke="#334155" stroke-width="1" />
+    <text x="459" y="18" fill="#34D399" font-family="sans-serif" font-size="12" font-weight="600">🌐 Applied Intuition</text>
+  </g>
+
+  <!-- Bottom Accent Bar -->
+  <rect x="0" y="296" width="1200" height="4" fill="url(#accentGrad)" />
+</svg>
